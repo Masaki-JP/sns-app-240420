@@ -42,6 +42,26 @@ struct PostTweetView: View {
     }
 }
 
+/// This extention is for the following warning.
+/// Publishing changes from within view updates is not allowed, this will cause undefined behavior.
+private extension View {
+    func sync(_ published: Binding<String>, with binding: Binding<String>) -> some View {
+        self
+            .onChange(of: published.wrappedValue) { oldValue, newValue in
+                guard oldValue != newValue,
+                      published.wrappedValue != binding.wrappedValue
+                else { return }
+                binding.wrappedValue = newValue
+            }
+            .onChange(of: binding.wrappedValue) { oldValue, newValue in
+                guard oldValue != newValue,
+                      published.wrappedValue != binding.wrappedValue
+                else { return }
+                published.wrappedValue = newValue
+            }
+    }
+}
+
 struct PostTweetViewWrapper: View {
     @State private var isShowingPostTweetView = true
 
