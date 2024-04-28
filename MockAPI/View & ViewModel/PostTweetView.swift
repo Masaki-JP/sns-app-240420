@@ -2,12 +2,13 @@ import SwiftUI
 
 struct PostTweetView: View {
     @StateObject private var viewModel = PostTweetViewModel()
+    @State private var text = ""
     @FocusState private var isFocused: Bool
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
-            TextEditor(text: $viewModel.text)
+            TextEditor(text: $text)
                 .focused($isFocused)
                 .navigationTitle("What are you doing?")
                 .navigationBarTitleDisplayMode(.inline)
@@ -36,6 +37,7 @@ struct PostTweetView: View {
                 .onAppear { isFocused = true }
         }
         .disabled(viewModel.isWorking)
+        .sync($text, with: $viewModel.text)
         .alert("Error occurred.", isPresented: $viewModel.isShowingAlert) {
             Button("OK") {}
         }
