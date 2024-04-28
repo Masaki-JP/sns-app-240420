@@ -2,12 +2,13 @@ import SwiftUI
 
 struct PostTweetView: View {
     @StateObject private var viewModel = PostTweetViewModel()
+    @State private var text = ""
     @FocusState private var isFocused: Bool
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
-            TextEditor(text: $viewModel.text)
+            TextEditor(text: $text)
                 .focused($isFocused)
                 .navigationTitle("What are you doing?")
                 .navigationBarTitleDisplayMode(.inline)
@@ -36,9 +37,30 @@ struct PostTweetView: View {
                 .onAppear { isFocused = true }
         }
         .disabled(viewModel.isWorking)
+        .sync($text, with: $viewModel.text)
         .alert("Error occurred.", isPresented: $viewModel.isShowingAlert) {
             Button("OK") {}
         }
+    }
+}
+
+/// This extention is for the following warning.
+/// Publishing changes from within view updates is not allowed, this will cause undefined behavior.
+private extension View {
+    func sync(_ published: Binding<String>, with binding: Binding<String>) -> some View {
+        self
+            .onChange(of: published.wrappedValue) { oldValue, newValue in
+                guard oldValue != newValue,
+                      published.wrappedValue != binding.wrappedValue
+                else { return }
+                binding.wrappedValue = newValue
+            }
+            .onChange(of: binding.wrappedValue) { oldValue, newValue in
+                guard oldValue != newValue,
+                      published.wrappedValue != binding.wrappedValue
+                else { return }
+                published.wrappedValue = newValue
+            }
     }
 }
 
