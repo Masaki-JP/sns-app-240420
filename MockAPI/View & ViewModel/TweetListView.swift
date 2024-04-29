@@ -50,9 +50,9 @@ struct TweetListView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Post", systemImage: "paperplane", action: {
+                    Button("Post", systemImage: "paperplane") {
                         viewModel.isShowingPostTweetView = true
-                    })
+                    }
                 }
             }
             .overlay {
@@ -91,10 +91,10 @@ struct TweetListView: View {
         }, description: {
             Text("Something is wrong. Please, try again.")
         }, actions: {
-            Button(action: viewModel.didRetryButtonTappedAction) {
-                Text("Retry")
-                    .padding(.horizontal)
-            }
+            Button(
+                action: { viewModel.didRetryButtonTappedAction() } ,
+                label: { Text("Retry").padding(.horizontal) }
+            )
             .buttonStyle(.bordered)
         })
     }

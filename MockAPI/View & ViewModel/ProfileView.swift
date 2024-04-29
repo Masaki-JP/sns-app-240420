@@ -78,10 +78,10 @@ struct ProfileView: View {
         }, description: {
             Text("Something is wrong. Please, try again.")
         }, actions: {
-            Button(action: viewModel.didRetryButtonTappedAction) {
-                Text("Retry")
-                    .padding(.horizontal)
-            }
+            Button(
+                action: { viewModel.didRetryButtonTappedAction() },
+                label: { Text("Retry").padding(.horizontal) }
+            )
             .buttonStyle(.bordered)
         })
     }
@@ -98,16 +98,16 @@ struct ProfileView: View {
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             if viewModel.isEditMode == true {
-                Button("Done", action: viewModel.didEditDoneButtonTapAction)
+                Button("Done") { viewModel.didEditDoneButtonTapAction() }
                     .disabled(viewModel.isWorking)
             } else {
-                Button("Edit", action: viewModel.didEditButtonTapAction)
+                Button("Edit") { viewModel.didEditButtonTapAction() }
                     .disabled(viewModel.isReady == false || viewModel.isWorking == true)
             }
         }
         ToolbarItem(placement: .topBarTrailing) {
             if viewModel.isEditMode == true {
-                Button("Delete", action: viewModel.didDeleteButtonTapAction)
+                Button("Delete") { viewModel.didDeleteButtonTapAction() }
                     .tint(.red)
                     .disabled(viewModel.deleteTargetTweets.isEmpty || viewModel.isWorking)
             } else {
