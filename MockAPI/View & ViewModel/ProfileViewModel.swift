@@ -57,7 +57,7 @@ extension ProfileView {
             isWorking = true
             Task {
                 defer { isWorking = false }
-                await tweetRepository.removeTweets(ids: deleteTargetTweets)
+                await tweetRepository.remove(ids: deleteTargetTweets)
                 deleteTargetTweets.removeAll()
                 isEditMode = false
                 tweets = try? await tweetRepository.get(userID: userID)

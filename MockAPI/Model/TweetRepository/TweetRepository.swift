@@ -36,7 +36,7 @@ struct TweetRepository: TweetRepositoryProtocol {
         try await TweetAPIClient().createTweet(userName: userName, userID: userID, text: text)
     }
 
-    func removeTweets(ids: Set<EntityID<Tweet>>) async {
+    func remove(ids: Set<EntityID<Tweet>>) async {
         await TweetAPIClient().deleteTweets(ids)
     }
 

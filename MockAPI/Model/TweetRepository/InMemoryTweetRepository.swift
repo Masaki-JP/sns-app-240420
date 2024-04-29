@@ -11,7 +11,7 @@ struct InMemoryTweetRepository: TweetRepositoryProtocol {
         return getTweets().filter { $0.user!.id == userID }
     }
 
-    func removeTweets(ids: Set<EntityID<Tweet>>) async {
+    func remove(ids: Set<EntityID<Tweet>>) async {
         fatalError("InMemoryTweetRepository exist only for Preview.")
     }
 
