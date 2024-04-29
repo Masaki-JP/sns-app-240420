@@ -30,7 +30,7 @@ struct TweetRepository: TweetRepositoryProtocol {
         return tweets.sorted(by: { $0.postedTime > $1.postedTime })
     }
 
-    func createTweet(userName: String, userID: EntityID<User>, text: String) async throws {
+    func create(userName: String, userID: EntityID<User>, text: String) async throws {
         guard await UserAPIClient().authenticateUser(userName: userName, userID: userID)
         else { throw TweetRepositoryError.invalidUser }
         try await TweetAPIClient().createTweet(userName: userName, userID: userID, text: text)

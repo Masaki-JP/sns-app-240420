@@ -18,7 +18,7 @@ extension PostTweetView {
             Task {
                 defer { isWorking = false }
                 do {
-                    try await TweetRepository().createTweet(userName: userName, userID: userID, text: text)
+                    try await TweetRepository().create(userName: userName, userID: userID, text: text)
                     dismissFunction()
                 } catch {
                     if let error = error as? TweetRepository.TweetRepositoryError,
