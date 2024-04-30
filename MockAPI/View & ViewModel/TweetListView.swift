@@ -41,7 +41,7 @@ struct TweetListView: View {
             }
             .navigationTitle("Tweet List")
             .navigationBarTitleDisplayMode(.inline)
-            .refreshable { await viewModel.refreshAction() }
+            .refreshable { await viewModel.onRefreshAction() }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

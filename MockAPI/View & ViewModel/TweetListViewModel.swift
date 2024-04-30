@@ -32,7 +32,7 @@ extension TweetListView {
             }
         }
 
-        func refreshAction() async {
+        func onRefreshAction() async {
             tweets = try? await tweetRepository.getAll()
         }
         
