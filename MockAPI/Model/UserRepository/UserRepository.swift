@@ -5,7 +5,7 @@ final class UserRepository: UserRepositoryProtcol {
     private init() {}
     static let shared = UserRepository()
 
-    func fetch(_ id: EntityID<User>) async throws -> User? {
+    func get(_ id: EntityID<User>) async throws -> User? {
         if users.contains(where: { $0.id == id }) {
             return users.filter { $0.id == id }.first!
         } else {
@@ -17,7 +17,7 @@ final class UserRepository: UserRepositoryProtcol {
     }
 
     /// ⚠️ Ignore not found users.
-    func fetch(_ ids: Set<EntityID<User>>) async throws -> [User] {
+    func get(_ ids: Set<EntityID<User>>) async throws -> [User] {
         let additionalUsers = try await withThrowingTaskGroup(of: User?.self) { taskGroup in
             for id in ids {
                 guard self.users.contains(where: { $0.id.value == id.value }) == false

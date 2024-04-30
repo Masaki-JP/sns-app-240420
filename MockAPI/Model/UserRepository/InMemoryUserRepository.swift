@@ -1,14 +1,14 @@
 import Foundation
 
 final class InMemoryUserRepository: UserRepositoryProtcol {
-    func fetch(_ id: EntityID<User>) async throws -> User? {
+    func get(_ id: EntityID<User>) async throws -> User? {
         guard users.filter({ $0.id == id }).count == 1,
               let user = users.filter({ $0.id == id }).first
         else { fatalError() }
         return user
     }
 
-    func fetch(_ ids: Set<EntityID<User>>) async throws -> [User] {
+    func get(_ ids: Set<EntityID<User>>) async throws -> [User] {
         return ids.map { id in
             guard users.filter({ $0.id == id }).count == 1,
                   let user = users.filter({ $0.id == id }).first
