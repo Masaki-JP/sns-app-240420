@@ -36,7 +36,7 @@ extension TweetListView {
             tweets = try? await tweetRepository.getAll()
         }
         
-        func didRetryButtonTappedAction() {
+        func didTapRetryButton() {
             guard isWorking == false else { return }
             isWorking = true
             Task {

@@ -9,7 +9,7 @@ extension SignUpView {
         @AppStorage("userID") private var _userID = ""
         @Published var isShowSignUpFailureAlert = false
 
-        func didSignUpButtonTappedAction() {
+        func didTapSignUpButton() {
             guard isWorking == false else { return }
             isWorking = true
             Task {

@@ -11,7 +11,7 @@ extension PostTweetView {
         @AppStorage("userID") private var _userID = ""
         private var userID: EntityID<User> { .init(value: _userID) }
 
-        func didPostButtonTappedAction(_ dismissFunction: @escaping () -> Void) {
+        func didTapPostButton(_ dismissFunction: @escaping () -> Void) {
             guard text.isEmpty == false, isWorking == false
             else { return }
             isWorking = true
@@ -30,7 +30,7 @@ extension PostTweetView {
             }
         }
 
-        func didCancelButtonTappedAction(_ dismissFunction: @escaping () -> Void) {
+        func didTapCancelButton(_ dismissFunction: @escaping () -> Void) {
             if text.isEmpty {
                 dismissFunction()
             } else {

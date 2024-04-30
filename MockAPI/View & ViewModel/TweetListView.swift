@@ -92,7 +92,7 @@ struct TweetListView: View {
             Text("Something is wrong. Please, try again.")
         }, actions: {
             Button(
-                action: { viewModel.didRetryButtonTappedAction() } ,
+                action: { viewModel.didTapRetryButton() } ,
                 label: { Text("Retry").padding(.horizontal) }
             )
             .buttonStyle(.bordered)

@@ -25,7 +25,7 @@ extension ProfileView {
             isReady = true
         }
         
-        func didRetryButtonTappedAction() {
+        func didTapRetryButton() {
             guard isWorking == false else { return }
             isWorking = true
             Task {
@@ -34,7 +34,7 @@ extension ProfileView {
             }
         }
         
-        func didTweetRowTapAction(id: EntityID<Tweet>) {
+        func didTapTweetRow(id: EntityID<Tweet>) {
             guard isEditMode else { return }
             if deleteTargetTweets.contains(id) {
                 deleteTargetTweets.remove(id)
@@ -43,16 +43,16 @@ extension ProfileView {
             }
         }
         
-        func didEditDoneButtonTapAction() {
+        func didTapEditDoneButton() {
             deleteTargetTweets.removeAll()
             isEditMode = false
         }
         
-        func didEditButtonTapAction() {
+        func didTapEditButton() {
             isEditMode = true
         }
         
-        func didDeleteButtonTapAction() {
+        func didTapDeleteButton() {
             guard isWorking == false else { return }
             isWorking = true
             Task {

@@ -39,7 +39,7 @@ struct ProfileView: View {
             case .some(let tweets) where tweets.isEmpty == false:
                 ForEach(tweets) { tweet in
                     Button {
-                        viewModel.didTweetRowTapAction(id: tweet.id)
+                        viewModel.didTapTweetRow(id: tweet.id)
                     } label: {
                         tweetRow(tweet, numberOfLineLimit: nil)
                             .overlay {
@@ -79,7 +79,7 @@ struct ProfileView: View {
             Text("Something is wrong. Please, try again.")
         }, actions: {
             Button(
-                action: { viewModel.didRetryButtonTappedAction() },
+                action: { viewModel.didTapRetryButton() },
                 label: { Text("Retry").padding(.horizontal) }
             )
             .buttonStyle(.bordered)
@@ -98,16 +98,16 @@ struct ProfileView: View {
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             if viewModel.isEditMode == true {
-                Button("Done") { viewModel.didEditDoneButtonTapAction() }
+                Button("Done") { viewModel.didTapEditDoneButton() }
                     .disabled(viewModel.isWorking)
             } else {
-                Button("Edit") { viewModel.didEditButtonTapAction() }
+                Button("Edit") { viewModel.didTapEditButton() }
                     .disabled(viewModel.isReady == false || viewModel.isWorking == true)
             }
         }
         ToolbarItem(placement: .topBarTrailing) {
             if viewModel.isEditMode == true {
-                Button("Delete") { viewModel.didDeleteButtonTapAction() }
+                Button("Delete") { viewModel.didTapDeleteButton() }
                     .tint(.red)
                     .disabled(viewModel.deleteTargetTweets.isEmpty || viewModel.isWorking)
             } else {

@@ -19,7 +19,7 @@ struct SignUpView: View {
                 .background(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 5.0))
                 .padding(.top, 7.5)
-            Button("Sign Up") { viewModel.didSignUpButtonTappedAction() }
+            Button("Sign Up") { viewModel.didTapSignUpButton() }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
                 .fontWeight(.semibold)

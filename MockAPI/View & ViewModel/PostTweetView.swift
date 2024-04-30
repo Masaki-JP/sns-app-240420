@@ -20,7 +20,7 @@ struct PostTweetView: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button("Cancel") {
-                            viewModel.didCancelButtonTappedAction(dismiss.callAsFunction)
+                            viewModel.didTapCancelButton(dismiss.callAsFunction)
                         }
                         .confirmationDialog(
                             "Are you sure?",
@@ -31,7 +31,7 @@ struct PostTweetView: View {
                         }
                     }
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button("Post") { viewModel.didPostButtonTappedAction(dismiss.callAsFunction) }
+                        Button("Post") { viewModel.didTapPostButton(dismiss.callAsFunction) }
                     }
                 }
                 .onAppear { isFocused = true }
