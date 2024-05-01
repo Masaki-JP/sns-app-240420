@@ -5,6 +5,7 @@ struct PostTweetView: View {
     @State private var text = ""
     @FocusState private var isFocused: Bool
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         NavigationStack {
@@ -14,6 +15,8 @@ struct PostTweetView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .overlay {
                     if viewModel.isWorking {
+                        let bgColor: Color = colorScheme == .light ? .white : .black
+                        bgColor.opacity(0.75)
                         ProgressView("Posting...")
                     }
                 }

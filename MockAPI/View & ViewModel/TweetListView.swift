@@ -6,6 +6,7 @@ struct TweetListView: View {
     @AppStorage("userID") private var _userID = ""
     private var userID: EntityID<User> { .init(value: _userID) }
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         NavigationStack {
@@ -57,7 +58,8 @@ struct TweetListView: View {
             }
             .overlay {
                 if viewModel.isWorking {
-                    Color.primary.opacity(0.05)
+                    let bgColor: Color = colorScheme == .light ? .white : .black
+                    bgColor.opacity(0.75)
                     ProgressView("Reloading...")
                 }
             }
