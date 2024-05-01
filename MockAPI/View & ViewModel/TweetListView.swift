@@ -19,7 +19,8 @@ struct TweetListView: View {
                                 NavigationLink {
                                     TweetDetailView()
                                 } label: {
-                                    tweetRow(tweet)
+                                    tweetRow(tweet, numberOfLineLimit: nil)
+//                                    tweetRow(tweet)
                                 }
                                 .foregroundStyle(.primary)
                                 Divider()
