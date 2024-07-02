@@ -5,6 +5,8 @@ struct InMemoryTweetRepository: TweetRepositoryProtocol {
         var tweets = getTweets()
         tweets.sort(by: { $0.postedTime > $1.postedTime })
         return tweets
+
+//        getTweets().sorted(by: { $0.postedTime > $1.postedTime })
     }
 
     func get(userID: EntityID<User>) async throws -> [Tweet] {

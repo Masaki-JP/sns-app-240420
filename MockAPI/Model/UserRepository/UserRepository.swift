@@ -26,21 +26,43 @@ final class UserRepository: UserRepositoryProtcol {
                     try await UserAPIClient().fetch(id)
                 }
             }
+
             var users = [User]()
             for try await user in taskGroup {
                 guard let user else { continue }
                 users.append(user)
             }
+
+//            let users = try await taskGroup
+//                .compactMap { $0 }
+//                .reduce(into: [User]()) { $0.append($1) }
+
             return users
         }
         users.append(contentsOf: additionalUsers)
-        var users = [User]()
+
+        var requiredUsers = [User]()
         for id in ids {
             guard self.users.filter({ $0.id == id }).count == 1,
-            let user = self.users.filter({ $0.id == id }).first
-            else { continue }
-            users.append(user)
+                  let user = self.users.filter({ $0.id == id }).first else { continue }
+            requiredUsers.append(user)
         }
-        return users
+
+//        let requiredUsers: [User] = ids.compactMap { id in
+//            guard self.users.filter({ $0.id == id }).count == 1,
+//                  let user = self.users.filter({ $0.id == id }).first else {
+//                return nil
+//            }
+//            return user
+//
+////            if self.users.filter({ $0.id == id }).count == 1,
+////               let user = self.users.filter({ $0.id == id }).first {
+////                return user
+////            } else {
+////                return nil
+////            }
+//        }
+
+        return requiredUsers
     }
 }
